@@ -30,9 +30,10 @@ with open(file_path, newline="") as csvfile:
         clouds = call_json['weather'][0]['description']
         wind = call_json['wind']['speed']
 
-        print("Temp: ", temp)
+        print("Temp: ", temp, u"\u00b0", "F")
         weather_dict['temp'].append(temp)
         print("Sky: ", clouds)
         weather_dict['sky'].append(clouds)
-        print("Wind Speed: ", wind)
+        print("Wind Speed: ", wind, " mph")
         weather_dict['wind'].append(wind)
+        print("----------------------")
