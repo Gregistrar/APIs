@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('nhl_data.db')
+conn = sqlite3.connect('/Users/Ghodgson/Databases/nhl_data.db')
 c = conn.cursor()
 
 # Create the table for NHL team info

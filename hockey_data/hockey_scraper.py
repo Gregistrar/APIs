@@ -59,7 +59,7 @@ for i in range(len(teams_data)):
 
 df = pd.DataFrame(team_info)
 
-conn = sqlite3.connect('nhl_data.db')
+conn = sqlite3.connect('/Users/Ghodgson/Databases/nhl_data.db')
 c = conn.cursor()
 for item in team_info:
   c.execute('''insert into team_info values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''', item)
