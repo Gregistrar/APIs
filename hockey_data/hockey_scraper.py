@@ -19,10 +19,10 @@ URL = 'https://statsapi.web.nhl.com/api/v1/teams/{}'
 all_team_frames = []
 for i in range(1,55):
     r = requests.get(URL.format(i))
-    data = r.json()
+    df_1 = r.json()
+    team_df = json_normalize(df_1['teams'])
     team_name = team_df.iloc[0]['name'].encode('ascii', 'ignore')
     print("Processing.........{}".format(team_name))
-    team_df = json_normalize(data['teams'])
     all_team_frames.append(team_df)
 
 team_concat = pd.concat(all_team_frames, ignore_index=True)
@@ -30,7 +30,6 @@ team_concat.head()
 team_concat.info()
 
 team_concat.columns = team_concat.columns.str.replace('.', '_')
-
 team_final = team_concat.values.tolist()
 
 conn = sqlite3.connect('/Users/Ghodgson/Databases/nhl_data.db')
@@ -47,6 +46,20 @@ c.fetchall()
 
 
 conn.close()
+
+
+
+
+
+# More stuff that didn't quite work yet....
+dict([(list(d.values())[1], list(d.values())[0]) for d in ast.literal_eval(ld)])
+df = json.dumps(data)
+b = json.loads(df)
+l = b["teams"][0]
+    .keys()
+d = pd.DataFrame.from_dict(b)
+d = data[[l.values()]]
+d.info()
 
 
 
