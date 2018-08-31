@@ -73,3 +73,53 @@ c.fetchall()
 conn.close()
 
 b = [a[6] for a in team_info]
+
+
+
+
+# This was the first test run of the NHL Data API. Leaving this here for future references.
+
+# # First level keys are 'copyright' and 'teams'
+# data.keys()
+# team_df = json_normalize(data['teams'])
+# team_df.info()
+#
+# # Find the second level of keys in the json data
+# a = json.dumps(data)
+# b = json.loads(a)
+# l = b["teams"][0].keys()
+# print(l)
+#
+# # Subset of the data that only includes team information
+# teams_data = data['teams']
+#
+# # Print team name and arena. Testing the different keys and values in the data.
+# team_info = []
+# for i in range(len(teams_data)):
+#     print("The", teams_data[i]['name'], "play at", teams_data[i]['venue']['name'], "in",
+#           teams_data[i]['venue']['city'] + ".")
+#     list = []
+#     list.append(teams_data[i]['id'])
+#     list.append(teams_data[i]['abbreviation'])
+#     list.append(teams_data[i]['name'])
+#     list.append(teams_data[i]['teamName'])
+#     list.append(teams_data[i]['venue']['name'])
+#     list.append(teams_data[i]['venue']['city'])
+#     list.append(teams_data[i]['locationName'])
+#     try:
+#         list.append(teams_data[i]['firstYearOfPlay'])
+#     except:
+#         list.append(None)
+#     list.append(teams_data[i]['division']['id'])
+#     list.append(teams_data[i]['division']['name'])
+#     list.append(teams_data[i]['division']['nameShort'])
+#     list.append(teams_data[i]['conference']['id'])
+#     list.append(teams_data[i]['conference']['name'])
+#     list.append(teams_data[i]['franchise']['franchiseId'])
+#     list.append(teams_data[i]['franchise']['teamName'])
+#     list.append(teams_data[i]['officialSiteUrl'])
+#     list.append(teams_data[i]['active'])
+#     team_info.append(list)
+#
+# df = pd.DataFrame(team_info)
+
