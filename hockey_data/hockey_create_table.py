@@ -49,8 +49,8 @@ conn.close()
 
 
 # For testing purposes ONLY
-# dropTable = "DROP TABLE team_info"
-# c.execute(dropTable)
+dropTable = "DROP TABLE team_info"
+c.execute(dropTable)
 
 
 

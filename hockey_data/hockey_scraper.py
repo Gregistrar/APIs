@@ -19,8 +19,8 @@ URL = 'https://statsapi.web.nhl.com/api/v1/teams/{}'
 all_team_frames = []
 for i in range(1,55):
     r = requests.get(URL.format(i))
-    df_1 = r.json()
-    team_df = json_normalize(df_1['teams'])
+    df = r.json()
+    team_df = json_normalize(df['teams'])
     team_name = team_df.iloc[0]['name'].encode('ascii', 'ignore')
     print("Processing.........{}".format(team_name))
     all_team_frames.append(team_df)
@@ -34,32 +34,15 @@ team_final = team_concat.values.tolist()
 
 conn = sqlite3.connect('/Users/Ghodgson/Databases/nhl_data.db')
 c = conn.cursor()
-
 for item in team_final:
   c.execute('''insert into nhl_team_info_all values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''', item)
-
 # Lots of time was wasted here, conn.commit() finally pushed the data into the database.
 conn.commit()
 
 c.execute("SELECT * FROM nhl_team_info_all")
 c.fetchall()
 
-
 conn.close()
-
-
-
-
-
-# More stuff that didn't quite work yet....
-dict([(list(d.values())[1], list(d.values())[0]) for d in ast.literal_eval(ld)])
-df = json.dumps(data)
-b = json.loads(df)
-l = b["teams"][0]
-    .keys()
-d = pd.DataFrame.from_dict(b)
-d = data[[l.values()]]
-d.info()
 
 
 
