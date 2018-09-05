@@ -29,7 +29,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS nhl_team_info_all (
             , franchise_link text
             , franchise_teamName text
             , franchiseId integer
-            , id integer
+            , id integer primary key
             , link text
             , locationName text
             , name text
@@ -49,7 +49,7 @@ conn.close()
 
 
 # For testing purposes ONLY
-dropTable = "DROP TABLE team_info"
+dropTable = "DROP TABLE nhl_team_info_all"
 c.execute(dropTable)
 
 

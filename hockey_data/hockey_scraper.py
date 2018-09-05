@@ -6,7 +6,7 @@ Website for API documentation
 https://gitlab.com/dword4/nhlapi
 
 Structure:
-Scrapers - Team Info,
+Scrapers - Team Info, Roster Info,
 
 Insert SQLite - Team Info,
 """
@@ -27,8 +27,8 @@ def get_team_info():
     #r = requests.get(URL)
     #data = r.json()
     #pprint.pprint(data)
-
     # Loop that collects data for all teams that are both active and inactive
+
     all_team_frames = []
     for i in range(1,55):
         r = requests.get(URL.format(i))
@@ -48,7 +48,6 @@ def get_team_info():
 
 
 
-
 def get_current_roster_info():
     # Select team IDs of all current teams
     c.execute("SELECT id FROM nhl_team_info_all WHERE active = 1")
@@ -60,11 +59,21 @@ def get_current_roster_info():
     r = requests.get(URL)
     data = r.json()
     pprint.pprint(data)
-    json_normalize(data)
+    #team_df = json_normalize(data['teams'])
+    roster_team_df = data['teams']
+
+    current_roster = roster_team_df[0]['roster']['roster']
+    len(current_roster)
+    for i in range(0, len(current_roster)):
+        print(current_roster[i])
 
 
 
 
+
+"""
+Functions for inserting data into SQLite database
+"""
 
 def insert_team_info():
     conn = sqlite3.connect('/Users/Ghodgson/Databases/nhl_data.db')
@@ -78,6 +87,7 @@ def insert_team_info():
     c.fetchall()
 
     conn.close()
+    print("Finished inserting team info.")
 
 
 
